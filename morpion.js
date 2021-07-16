@@ -126,13 +126,27 @@ class Morpion {
 		}
 
 		let hasPlayed = false;
-		this.gridMap.forEach((line, y) => {
-			line.forEach((cell, x) => {
-				if (!cell && !hasPlayed) {
-					hasPlayed = this.drawHit(x, y, this.iaPlayer);
-				}
-			});
-		});
+		let playedHit = {};
+
+		while(!hasPlayed){
+			let x = this.getRandomInt(3);
+			let y = this.getRandomInt(3);
+			if (!playedHit[`${x}, ${y}`]) {
+				hasPlayed = this.drawHit(x, y, this.iaPlayer);
+			}
+			playedHit[`${x}, ${y}`] = true;
+		}
+		// this.gridMap.forEach((line, y) => {
+		// 	line.forEach((cell, x) => {
+		// 		if (!cell && !hasPlayed) {
+		// 			hasPlayed = this.drawHit(x, y, this.iaPlayer);
+		// 		}
+		// 	});
+		// });
+	}
+
+	getRandomInt = (max) => {
+		return Math.floor(Math.random() * max);
 	}
 }
 
